@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Timer Durasi</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 40px;
+      font-size: 2em;
+    }
+  </style>
+</head>
+<body>
+  <div id="duration">Durasi: 0 detik</div>
+
+  <script>
+    let seconds = 0;
+    setInterval(() => {
+      seconds++;
+      document.getElementById("duration").innerText = `Durasi: ${seconds} detik`;
+    }, 1000);
+  </script>
+</body>
+</html>
