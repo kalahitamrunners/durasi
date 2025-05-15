@@ -13,21 +13,22 @@
   </style>
 </head>
 <body>
- <div id="durasi">Durasi: 0 detik</div>
+<div id="durasi">Timer...</div>
 
 <script>
-  const area = "Machining 1.1";
+  // Ambil parameter dari URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const area = urlParams.get("area") || "Machining 1.1"; // default
 
   async function updateDurasi() {
-    const res = await fetch(`http://10.14.173.35/andon/durasi.php?area=${area}`);
+    const res = await fetch(`http://10.14.173.35/andon/durasi.php?area=${encodeURIComponent(area)}`);
     const data = await res.json();
-    document.getElementById("durasi").innerText = `Durasi: ${data.durasi} detik`;
+    document.getElementById("durasi").innerText = `Area ${data.area} - Durasi: ${data.durasi} detik`;
   }
 
   updateDurasi();
-  setInterval(updateDurasi, 1000); // tiap 1 detik refresh
+  setInterval(updateDurasi, 1000);
 </script>
-
 
 
 </body>
