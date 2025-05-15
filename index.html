@@ -13,15 +13,21 @@
   </style>
 </head>
 <body>
- <div id="duration">Durasi: 0 detik</div>
+ <div id="durasi">Durasi: 0 detik</div>
 
 <script>
-  let seconds = 0;
-  setInterval(() => {
-    seconds++;
-    document.getElementById("duration").innerText = `Durasi: ${seconds} detik`;
-  }, 1000);
+  const area = "Machining 1.1";
+
+  async function updateDurasi() {
+    const res = await fetch(`http://10.14.173.35/andon/durasi.php?area=${area}`);
+    const data = await res.json();
+    document.getElementById("durasi").innerText = `Durasi: ${data.durasi} detik`;
+  }
+
+  updateDurasi();
+  setInterval(updateDurasi, 1000); // tiap 1 detik refresh
 </script>
+
 
 
 </body>
