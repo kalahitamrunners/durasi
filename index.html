@@ -13,29 +13,14 @@
   </style>
 </head>
 <body>
-  <div id="duration">Loading...</div>
+  <div id="duration">Durasi: 0 detik</div>
 
 <script>
-  async function startTimer() {
-    try {
-      const response = await fetch("http://10.14.173.35/andon/tes.php");
-      const text = await response.text();
-
-      // Ubah ke Date
-      const startTime = new Date(text);
-
-      setInterval(() => {
-        const now = new Date();
-        const seconds = Math.floor((now - startTime) / 1000);
-        document.getElementById("duration").innerText = `Durasi: ${seconds} detik`;
-      }, 1000);
-    } catch (error) {
-      document.getElementById("duration").innerText = "Gagal ambil waktu start";
-      console.error("Error:", error);
-    }
-  }
-
-  startTimer();
+  let seconds = 0;
+  setInterval(() => {
+    seconds++;
+    document.getElementById("duration").innerText = Durasi: ${seconds} detik;
+  }, 1000);
 </script>
 
 </body>
