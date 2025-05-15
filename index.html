@@ -7,20 +7,36 @@
     body {
       font-family: sans-serif;
       text-align: center;
-      padding-top: 40px;
+      padding-top: 10px;
       font-size: 2em;
     }
   </style>
 </head>
 <body>
-  <div id="duration">Durasi: 0 detik</div>
+  <div id="duration">Loading...</div>
 
-  <script>
-    let seconds = 0;
-    setInterval(() => {
-      seconds++;
-      document.getElementById("duration").innerText = `Durasi: ${seconds} detik`;
-    }, 1000);
-  </script>
+<script>
+  async function startTimer() {
+    try {
+      const response = await fetch("http://10.14.173.35/andon/tes.php");
+      const text = await response.text();
+
+      // Ubah ke Date
+      const startTime = new Date(text);
+
+      setInterval(() => {
+        const now = new Date();
+        const seconds = Math.floor((now - startTime) / 1000);
+        document.getElementById("duration").innerText = `Durasi: ${seconds} detik`;
+      }, 1000);
+    } catch (error) {
+      document.getElementById("duration").innerText = "Gagal ambil waktu start";
+      console.error("Error:", error);
+    }
+  }
+
+  startTimer();
+</script>
+
 </body>
 </html>
